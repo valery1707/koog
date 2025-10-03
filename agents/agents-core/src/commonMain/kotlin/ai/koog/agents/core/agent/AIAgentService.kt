@@ -200,7 +200,9 @@ public interface AIAgentService<Input, Output> {
      */
     public suspend fun createAgent(
         id: String? = null,
-        clock: Clock = Clock.System
+        toolRegistry: ToolRegistry = this.toolRegistry,
+        agentConfig: AIAgentConfig = this.agentConfig,
+        clock: Clock = Clock.System,
     ): AIAgent<Input, Output>
 
     /**
@@ -215,8 +217,10 @@ public interface AIAgentService<Input, Output> {
     public suspend fun createAgentAndRun(
         agentInput: Input,
         id: String? = null,
-        clock: Clock = Clock.System
-    ): Output = createAgent(id, clock).run(agentInput)
+        toolRegistry: ToolRegistry = this.toolRegistry,
+        agentConfig: AIAgentConfig = this.agentConfig,
+        clock: Clock = Clock.System,
+    ): Output = createAgent(id, toolRegistry, agentConfig, clock).run(agentInput)
 
     /**
      * Removes the specified AI agent from the service.
@@ -312,7 +316,9 @@ public abstract class AIAgentServiceBase<Input, Output> : AIAgentService<Input, 
     @InternalAgentsApi
     public abstract fun createManagedAgent(
         id: String? = null,
-        clock: Clock = Clock.System
+        toolRegistry: ToolRegistry,
+        agentConfig: AIAgentConfig,
+        clock: Clock = Clock.System,
     ): AIAgent<Input, Output>
 
     /**
@@ -323,8 +329,13 @@ public abstract class AIAgentServiceBase<Input, Output> : AIAgentService<Input, 
      * @return AIAgent instance with the specified configurations.
      */
     @OptIn(InternalAgentsApi::class)
-    final override suspend fun createAgent(id: String?, clock: Clock): AIAgent<Input, Output> {
-        val agent = createManagedAgent(id, clock)
+    final override suspend fun createAgent(
+        id: String?,
+        toolRegistry: ToolRegistry,
+        agentConfig: AIAgentConfig,
+        clock: Clock
+    ): AIAgent<Input, Output> {
+        val agent = createManagedAgent(id, toolRegistry, agentConfig, clock)
         managedAgents[agent.id] = agent
         return agent
     }
@@ -427,6 +438,8 @@ public constructor(
     @InternalAgentsApi
     override fun createManagedAgent(
         id: String?,
+        toolRegistry: ToolRegistry,
+        agentConfig: AIAgentConfig,
         clock: Clock
     ): AIAgent<Input, Output> = GraphAIAgent(
         inputType = inputType,
@@ -475,6 +488,8 @@ public constructor(
     @InternalAgentsApi
     override fun createManagedAgent(
         id: String?,
+        toolRegistry: ToolRegistry,
+        agentConfig: AIAgentConfig,
         clock: Clock
     ): FunctionalAIAgent<Input, Output> = FunctionalAIAgent(
         promptExecutor = promptExecutor,
