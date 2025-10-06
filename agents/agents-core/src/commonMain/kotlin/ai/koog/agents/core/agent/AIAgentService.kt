@@ -200,7 +200,7 @@ public interface AIAgentService<Input, Output> {
      */
     public suspend fun createAgent(
         id: String? = null,
-        toolRegistry: ToolRegistry = this.toolRegistry,
+        additionalToolRegistry: ToolRegistry = ToolRegistry.EMPTY,
         agentConfig: AIAgentConfig = this.agentConfig,
         clock: Clock = Clock.System,
     ): AIAgent<Input, Output>
@@ -307,35 +307,39 @@ public abstract class AIAgentServiceBase<Input, Output> : AIAgentService<Input, 
     private val managedAgents: ConcurrentMap<String, AIAgent<Input, Output>> = ConcurrentMap()
 
     /**
-     * Creates and registers a managed AI agent with an optional identifier and clock instance.
+     * Creates and registers a new managed AI agent with the specified configuration and tool registry.
      *
-     * @param id An optional identifier for the managed agent. If not provided, a unique identifier may be generated internally.
-     * @param clock A clock instance used for time-related operations within the agent. Defaults to the system clock.
-     * @return The newly created AI agent instance of type AIAgent<Input, Output>.
+     * @param id An optional unique identifier for the AI agent. If null, a default identifier will be generated.
+     * @param additionalToolRegistry A tool registry with additional tools available to the AI agent.
+     * @param agentConfig The configuration for the AI agent, including settings for its behavior and capabilities.
+     * @param clock The clock instance used for managing time-related operations. Defaults to the system clock.
+     * @return A new instance of `AIAgent` initialized with the specified parameters.
      */
     @InternalAgentsApi
     public abstract fun createManagedAgent(
         id: String? = null,
-        toolRegistry: ToolRegistry,
+        additionalToolRegistry: ToolRegistry,
         agentConfig: AIAgentConfig,
         clock: Clock = Clock.System,
     ): AIAgent<Input, Output>
 
     /**
-     * Creates and registers a new AI agent using the provided agent ID and clock.
+     * Creates and registers a new managed AI agent with the specified configuration and tool registry.
      *
-     * @param id Optional identifier for the AI agent. If null, a default ID will be generated.
-     * @param clock A clock instance to manage time-related operations for the agent.
-     * @return AIAgent instance with the specified configurations.
+     * @param id An optional unique identifier for the AI agent. If null, a default identifier will be generated.
+     * @param additionalToolRegistry A tool registry with additional tools available to the AI agent.
+     * @param agentConfig The configuration for the AI agent, including settings for its behavior and capabilities.
+     * @param clock The clock instance used for managing time-related operations.
+     * @return A new instance of `AIAgent` initialized with the specified parameters.
      */
     @OptIn(InternalAgentsApi::class)
     final override suspend fun createAgent(
         id: String?,
-        toolRegistry: ToolRegistry,
+        additionalToolRegistry: ToolRegistry,
         agentConfig: AIAgentConfig,
         clock: Clock
     ): AIAgent<Input, Output> {
-        val agent = createManagedAgent(id, toolRegistry, agentConfig, clock)
+        val agent = createManagedAgent(id, additionalToolRegistry, agentConfig, clock)
         managedAgents[agent.id] = agent
         return agent
     }
