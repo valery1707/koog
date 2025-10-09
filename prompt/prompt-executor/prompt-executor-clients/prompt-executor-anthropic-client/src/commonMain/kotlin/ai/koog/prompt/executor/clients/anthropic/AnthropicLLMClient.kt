@@ -487,7 +487,9 @@ public open class AnthropicLLMClient(
                     )
                 }
 
-                else -> TODO("Implement other content types")
+                else -> throw IllegalArgumentException(
+                    "Unhandled AnthropicContent type: ${content::class.qualifiedName}. Content: $content"
+                )
             }
         }
 
