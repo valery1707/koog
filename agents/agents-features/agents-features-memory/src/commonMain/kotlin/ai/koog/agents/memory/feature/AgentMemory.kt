@@ -540,6 +540,7 @@ internal suspend fun AIAgentLLMWriteSession.retrieveFactsFromHistory(
                     is Message.System -> append("<user>\n${message.content}\n</user>\n")
                     is Message.User -> append("<user>\n${message.content}\n</user>\n")
                     is Message.Assistant -> append("<assistant>\n${message.content}\n</assistant>\n")
+                    is Message.Reasoning -> append("<thinking>\n${message.content}\n</thinking>\n")
                     is Message.Tool.Call -> append(
                         "<tool_call tool=${message.tool}>\n${message.content}\n</tool_call>\n"
                     )

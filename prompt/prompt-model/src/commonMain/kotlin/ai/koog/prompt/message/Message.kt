@@ -3,6 +3,7 @@ package ai.koog.prompt.message
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
@@ -139,6 +140,30 @@ public sealed interface Message {
     }
 
     /**
+     * Represents a reasoning message exchanged in a chat system, encapsulating the content,
+     * role, and associated metadata, with an optional reference to the original thinking process.
+     *
+     * @property original An optional reference to the original [Thinking] process that generated this reasoning,
+     *                    providing context or tracing capabilities during operations. This property is transient and
+     *                    will not be serialized.
+     * @property content The content of the message as a string.
+     * @property role The [Role] of the message, indicating its source or function in the chat (e.g., assistant, user).
+     *                Defaults to [Role.Assistant].
+     * @property metaInfo Metadata associated with the reasoning, captured as a [ResponseMetaInfo] instance.
+     *                    Provides details such as token usage and timestamps.
+     */
+    @Serializable
+    public data class Reasoning(
+        @Transient
+        public val original: Thinking? = null,
+        override val content: String,
+        override val role: Role = Role.Assistant,
+        override val metaInfo: ResponseMetaInfo
+    ) : Message, Response {
+        override fun copy(updatedMetaInfo: ResponseMetaInfo): Reasoning = this.copy(metaInfo = updatedMetaInfo)
+    }
+
+    /**
      * Represents messages exchanged with tools, either as calls or results.
      */
     @Serializable
@@ -214,6 +239,16 @@ public sealed interface Message {
         override val role: Role = Role.System
     }
 }
+
+
+/**
+ * Represents a contract for implementing entities that encapsulate reasoning or thought processes.
+ *
+ * Classes that implement this interface may define specific mechanisms
+ * or structures for capturing and handling the concept of "thinking"
+ * during a particular computational or logical operation.
+ */
+public interface Thinking
 
 /**
  * Meta-information associated with a message in a chat system.
@@ -329,7 +364,14 @@ public data class ResponseMetaInfo(
             additionalInfo: Map<String, String> = emptyMap(),
             metadata: JsonObject? = null,
         ): ResponseMetaInfo =
-            ResponseMetaInfo(clock.now(), totalTokensCount, inputTokensCount, outputTokensCount, additionalInfo, metadata)
+            ResponseMetaInfo(
+                clock.now(),
+                totalTokensCount,
+                inputTokensCount,
+                outputTokensCount,
+                additionalInfo,
+                metadata
+            )
 
         /**
          * An empty instance of the [ResponseMetaInfo] with the timestamp set to a distant past.

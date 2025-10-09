@@ -305,17 +305,28 @@ public open class AnthropicLLMClient(
 
                 is Message.Assistant -> {
                     messages.add(
-                        AnthropicMessage(
-                            role = "assistant",
+                        AnthropicMessage.Assistant(
                             content = listOf(AnthropicContent.Text(message.content))
+                        )
+                    )
+                }
+
+                is Message.Reasoning -> {
+                    messages.add(
+                        AnthropicMessage.Assistant(
+                            content = listOf(
+                                message.original as? AnthropicContent.Thinking ?: AnthropicContent.Thinking(
+                                    signature = Uuid.random().toString(),
+                                    thinking = message.content // TODO: Use signature from original message if available
+                                )
+                            )
                         )
                     )
                 }
 
                 is Message.Tool.Result -> {
                     messages.add(
-                        AnthropicMessage(
-                            role = "user",
+                        AnthropicMessage.User(
                             content = listOf(
                                 AnthropicContent.ToolResult(
                                     toolUseId = message.id ?: "",
@@ -329,8 +340,7 @@ public open class AnthropicLLMClient(
                 is Message.Tool.Call -> {
                     // Create a new assistant message with the tool call
                     messages.add(
-                        AnthropicMessage(
-                            role = "assistant",
+                        AnthropicMessage.Assistant(
                             content = listOf(
                                 AnthropicContent.ToolUse(
                                     id = message.id ?: Uuid.random().toString(),
@@ -424,7 +434,11 @@ public open class AnthropicLLMClient(
 
                         val documentSource: DocumentSource = when (val content = attachment.content) {
                             is AttachmentContent.URL -> DocumentSource.Url(content.url)
-                            is AttachmentContent.Binary -> DocumentSource.Base64(content.asBase64(), attachment.mimeType)
+                            is AttachmentContent.Binary -> DocumentSource.Base64(
+                                content.asBase64(),
+                                attachment.mimeType
+                            )
+
                             is AttachmentContent.PlainText -> DocumentSource.PlainText(
                                 content.text,
                                 attachment.mimeType
@@ -439,7 +453,7 @@ public open class AnthropicLLMClient(
             }
         }
 
-        return AnthropicMessage(role = "user", content = listOfContent)
+        return AnthropicMessage.User(content = listOfContent)
     }
 
     private fun processAnthropicResponse(response: AnthropicResponse): List<Message.Response> {
@@ -447,35 +461,33 @@ public open class AnthropicLLMClient(
         val inputTokensCount = response.usage?.inputTokens
         val outputTokensCount = response.usage?.outputTokens
         val totalTokensCount = response.usage?.let { it.inputTokens?.plus(it.outputTokens ?: 0) ?: it.outputTokens }
+        val metaInfo = ResponseMetaInfo.create(
+            clock,
+            totalTokensCount = totalTokensCount,
+            inputTokensCount = inputTokensCount,
+            outputTokensCount = outputTokensCount,
+        )
 
         val responses = response.content.map { content ->
             when (content) {
-                is AnthropicResponseContent.Text -> {
-                    Message.Assistant(
-                        content = content.text,
-                        finishReason = response.stopReason,
-                        metaInfo = ResponseMetaInfo.create(
-                            clock,
-                            totalTokensCount = totalTokensCount,
-                            inputTokensCount = inputTokensCount,
-                            outputTokensCount = outputTokensCount,
-                        )
-                    )
+                is AnthropicContent.Text -> {
+                    Message.Assistant(content = content.text, finishReason = response.stopReason, metaInfo = metaInfo)
                 }
 
-                is AnthropicResponseContent.ToolUse -> {
+                is AnthropicContent.Thinking -> {
+                    Message.Reasoning(original = content, content = content.thinking, metaInfo = metaInfo)
+                }
+
+                is AnthropicContent.ToolUse -> {
                     Message.Tool.Call(
                         id = content.id,
                         tool = content.name,
                         content = content.input.toString(),
-                        metaInfo = ResponseMetaInfo.create(
-                            clock,
-                            totalTokensCount = totalTokensCount,
-                            inputTokensCount = inputTokensCount,
-                            outputTokensCount = outputTokensCount,
-                        )
+                        metaInfo = metaInfo
                     )
                 }
+
+                else -> TODO("Implement other content types")
             }
         }
 

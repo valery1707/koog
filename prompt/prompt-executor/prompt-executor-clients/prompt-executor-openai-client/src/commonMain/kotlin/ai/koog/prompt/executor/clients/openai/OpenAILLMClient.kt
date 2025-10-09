@@ -599,10 +599,19 @@ public open class OpenAILLMClient(
                         flushPendingCalls()
                         add(
                             Item.OutputMessage(
-                                role = "assistant",
                                 content = listOf(
                                     OutputContent.Text(text = message.content, annotations = emptyList())
                                 ),
+                            )
+                        )
+                    }
+
+                    is Message.Reasoning -> {
+                        flushPendingCalls()
+                        add(
+                            message.original as? Item.Reasoning ?: Item.Reasoning(
+                                Uuid.random().toString(),
+                                listOf(Item.Reasoning.Summary(message.content))
                             )
                         )
                     }
@@ -691,7 +700,6 @@ public open class OpenAILLMClient(
         )
 
         return response.output
-            .filter { it is Item.FunctionToolCall || it is Item.OutputMessage } // TODO: support all other types of Item
             .map { output ->
                 when (output) {
                     is Item.FunctionToolCall -> Message.Tool.Call(
@@ -704,6 +712,12 @@ public open class OpenAILLMClient(
                     is Item.OutputMessage -> Message.Assistant(
                         content = output.text(),
                         finishReason = output.status?.name,
+                        metaInfo = metaInfo
+                    )
+
+                    is Item.Reasoning -> Message.Reasoning(
+                        original = output,
+                        content = output.summary.joinToString(separator = "\n") { it.text },
                         metaInfo = metaInfo
                     )
 
