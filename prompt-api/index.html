@@ -1,0 +1,3898 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.koog.ai/prompt-api/">
+      
+      
+        <link rel="prev" href="../complex-workflow-agents/">
+      
+      
+        <link rel="next" href="../tools-overview/">
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>Prompt API - Koog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5P98');</script>
+<!-- End Google Tag Manager -->
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prompt-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--overrides original partial https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html -->
+<!--
+  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+    <nav
+            class="md-header__inner md-grid"
+            aria-label="Header"
+    >
+
+        <!-- Link to home -->
+        <a
+                href=".."
+                title="Koog"
+                class="md-header__button md-logo"
+                aria-label="Koog"
+                data-md-component="logo"
+        >
+            
+  <img src="../img/favicon.ico" alt="logo">
+
+        </a>
+
+        <!-- Button to open drawer -->
+        <label class="md-header__button md-icon" for="__drawer">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+
+        <!-- Header title -->
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Koog
+          </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prompt API
+            
+          </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color palette toggle -->
+        
+        
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+        
+        
+
+        <!-- User preference: color palette -->
+        
+        <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+
+        <!-- Site language selector -->
+        
+
+        <!-- Button to open search modal -->
+        
+        
+
+        <!-- Check if search is actually enabled - see https://t.ly/DT_0V -->
+        
+        <label class="md-header__button md-icon" for="__search">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        
+
+        <!-- custom slack icon-link-->
+        <div class="md_header__social">
+            <a
+                href="https://docs.koog.ai/koog-slack-channel/"
+                target="_blank"
+                title="Koog on Slack"
+                class="md_social-custom"
+            >
+                <div class="md_social-custom__icon md-icon">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M94.1 315.1c0 25.9-21.2 47.1-47.1 47.1S0 341 0 315.1 21.2 268 47.1 268h47.1v47.1zm23.7 0c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1v117.8c0 25.9-21.2 47.1-47.1 47.1s-47.1-21.2-47.1-47.1zm47.1-189c-25.9 0-47.1-21.2-47.1-47.1s21.2-47 47.1-47S212 53.2 212 79.1v47.1h-47.1zm0 23.7c25.9 0 47.1 21.2 47.1 47.1S190.8 244 164.9 244H47.1C21.2 244 0 222.8 0 196.9s21.2-47.1 47.1-47.1zm189 47.1c0-25.9 21.2-47.1 47.1-47.1s47 21.2 47 47.1-21.2 47.1-47.1 47.1h-47.1v-47.1zm-23.7 0c0 25.9-21.2 47.1-47.1 47.1S236 222.8 236 196.9V79.1c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1zm-47.1 189c25.9 0 47.1 21.2 47.1 47.1s-21.2 47-47.1 47-47.1-21.2-47.1-47.1v-47.1h47.1zm0-23.7c-25.9 0-47.1-21.2-47.1-47.1s21.2-47.1 47.1-47.1h117.8c25.9 0 47.1 21.2 47.1 47.1s-21.2 47.1-47.1 47.1z"/></svg>
+                </div>
+                <div>
+                    Support
+                </div>
+            </a>
+        </div>
+        <!-- end custom slack icon-link-->
+
+        <!-- custom YT icon-link-->
+        <div class="md_header__social">
+            <a
+                    href="https://youtrack.jetbrains.com/issues/KG/"
+                    target="_blank"
+                    title="Koog's Issues on YouTrack"
+                    class="md_social-custom"
+            >
+                <div class="md_social-custom__icon md-icon">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M311.4 32h8.6c35.3 0 64 28.7 64 64v352c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96c0-35.3 28.7-64 64-64h8.6c11-19.1 31.7-32 55.4-32h128c23.7 0 44.4 12.9 55.4 32M248 112c13.3 0 24-10.7 24-24s-10.7-24-24-24H136c-13.3 0-24 10.7-24 24s10.7 24 24 24zM128 256a32 32 0 1 0-64 0 32 32 0 1 0 64 0m32 0c0 13.3 10.7 24 24 24h112c13.3 0 24-10.7 24-24s-10.7-24-24-24H184c-13.3 0-24 10.7-24 24m0 128c0 13.3 10.7 24 24 24h112c13.3 0 24-10.7 24-24s-10.7-24-24-24H184c-13.3 0-24 10.7-24 24m-64 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64"/></svg>
+                </div>
+                <div>
+                    Issue Tracker
+                </div>
+            </a>
+        </div>
+        <!-- end custom YT icon-link-->
+
+        <!-- Repository information -->
+        
+        <div class="md-header__source">
+            <a href="https://github.com/JetBrains/koog" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Koog on GitHub
+  </div>
+</a>
+        </div>
+        
+    </nav>
+
+    <!-- Navigation tabs (sticky) -->
+    
+    
+    
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../why-koog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Why Koog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../examples/" class="md-tabs__link">
+          
+  
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://api.koog.ai/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+    
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Koog" class="md-nav__button md-logo" aria-label="Koog" data-md-component="logo">
+      
+  <img src="../img/favicon.ico" alt="logo">
+
+    </a>
+    Koog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JetBrains/koog" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Koog on GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../key-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Key concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../single-run-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Single-run agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../functional-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functional agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../complex-workflow-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Complex workflow agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Prompt API
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt API
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multimodal-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multimodal inputs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multimodal inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#textual-prompt-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Textual prompt content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-attachments" class="md-nav__link">
+    <span class="md-ellipsis">
+      File attachments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File attachments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attachmentcontent" class="md-nav__link">
+    <span class="md-ellipsis">
+      AttachmentContent
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixed-attachment-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed attachment content
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-between-llm-clients-and-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing between LLM clients and prompt executors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-prompts-with-llm-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running prompts with LLM clients
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-prompts-with-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running prompts with prompt executors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running prompts with prompt executors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#executor-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executor types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-single-provider-executor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a single provider executor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-multi-provider-executor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a multi-provider executor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-defined-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-defined prompt executors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-a-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a prompt
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cached-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cached prompt executors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retry-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry functionality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Retry functionality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-retry-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring retry behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retryable-error-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retryable error patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-with-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry with prompt executors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-with-retry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Streaming with retry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeout-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeout configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../built-in-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Built-in tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../annotation-based-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Annotation-based tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../class-based-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Class-based tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agent strategies
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            Agent strategies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodes-and-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pre-defined nodes and components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../predefined-agent-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Predefined strategies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-strategy-graphs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom strategy graphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel-node-execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel node execution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-transfer-between-nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data transfer between nodes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../history-compression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History compression
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model Context Protocol
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_10" id="__nav_1_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    A2A Protocol
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_10">
+            <span class="md-nav__icon md-icon"></span>
+            A2A Protocol
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2a-protocol-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2a-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A2A server implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2a-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A2A client implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a2a-koog-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A2A and Koog integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model-capabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model capabilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content-moderation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Content moderation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_13" id="__nav_1_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend framework integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_13">
+            <span class="md-nav__icon md-icon"></span>
+            Backend framework integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ktor-plugin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ktor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring Boot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_14" id="__nav_1_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_14">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../structured-output/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Structured output
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../streaming-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Streaming API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom nodes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sessions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LLM sessions and manual history management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_14_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_14_5" id="__nav_1_14_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Subgraphs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_14_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_14_5">
+            <span class="md-nav__icon md-icon"></span>
+            Subgraphs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subgraphs-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-subgraphs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Custom subgraphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Embeddings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ranked-document-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ranked document storage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_14_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_14_8" id="__nav_1_14_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_14_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_14_8">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tracing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Memory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-persistence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Persistence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_14_8_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_14_8_5" id="__nav_1_14_8_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OpenTelemetry
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_14_8_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_14_8_5">
+            <span class="md-nav__icon md-icon"></span>
+            OpenTelemetry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opentelemetry-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opentelemetry-langfuse-exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langfuse Exporter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opentelemetry-weave-exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Weave Exporter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../why-koog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Koog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Attachments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attachments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Banking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Banking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/BedrockAgent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BedrockAgent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Chess/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chess
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Guesser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guesser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Langfuse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langfuse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/GoogleMapsMcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP - Google Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/PlaywrightMcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP - Playwright
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/UnityMcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP - Unity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/OpenTelemetry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenTelemetry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/VaccumAgent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VaccumAgent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/Weave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Weave
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://api.koog.ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multimodal-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multimodal inputs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multimodal inputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#textual-prompt-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Textual prompt content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-attachments" class="md-nav__link">
+    <span class="md-ellipsis">
+      File attachments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File attachments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attachmentcontent" class="md-nav__link">
+    <span class="md-ellipsis">
+      AttachmentContent
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixed-attachment-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixed attachment content
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-between-llm-clients-and-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing between LLM clients and prompt executors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-prompts-with-llm-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running prompts with LLM clients
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-prompts-with-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running prompts with prompt executors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running prompts with prompt executors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#executor-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executor types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-single-provider-executor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a single provider executor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-multi-provider-executor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a multi-provider executor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-defined-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-defined prompt executors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-a-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a prompt
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cached-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cached prompt executors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retry-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry functionality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Retry functionality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-retry-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring retry behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retryable-error-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retryable error patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-with-prompt-executors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry with prompt executors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-with-retry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Streaming with retry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeout-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeout configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/JetBrains/koog/edit/develop/docs/docs/prompt-api.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="prompt-api">Prompt API</h1>
+<p>The Prompt API provides a comprehensive toolkit for interacting with Large Language Models (LLMs) in production applications. It offers:</p>
+<ul>
+<li><strong>Kotlin DSL</strong> for creating structured prompts with type safety.</li>
+<li><strong>Multi-provider support</strong> for OpenAI, Anthropic, Google, and other LLM providers.</li>
+<li><strong>Production features</strong> such as retry logic, error handling, and timeout configuration.</li>
+<li><strong>Multimodal capabilities</strong> for working with text, images, audio, and documents.</li>
+</ul>
+<h2 id="architecture-overview">Architecture overview</h2>
+<p>The Prompt API consists of three main layers:</p>
+<ul>
+<li><strong>LLM clients</strong>: Low-level interfaces to specific providers (OpenAI, Anthropic, etc.).</li>
+<li><strong>Decorators</strong>: Optional wrappers that add functionality like retry logic.</li>
+<li><strong>Prompt executors</strong>: High-level abstractions that manage client lifecycle and simplify usage.</li>
+</ul>
+<h2 id="creating-a-prompt">Creating a prompt</h2>
+<p>The Prompt API uses Kotlin DSL to create prompts. It supports the following types of messages:</p>
+<ul>
+<li><code>system</code>: Sets the context and instructions for the LLM.</li>
+<li><code>user</code>: Represents user input.</li>
+<li><code>assistant</code>: Represents LLM responses.</li>
+</ul>
+<p>Here is an example of a simple prompt:</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+import ai.koog.prompt.params.LLMParams
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;prompt_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LLMParams</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// Add a system message to set the context</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="c1">// Add a user message</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">user</span><span class="p">(</span><span class="s">&quot;Tell me about Kotlin&quot;</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// You can also add assistant messages for few-shot examples</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">assistant</span><span class="p">(</span><span class="s">&quot;Kotlin is a modern programming language...&quot;</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="c1">// Add another user message</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="n">user</span><span class="p">(</span><span class="s">&quot;What are its key features?&quot;</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-01.kt -->
+
+<h2 id="multimodal-inputs">Multimodal inputs</h2>
+<p>In addition to providing text messages within prompts, Koog also lets you send images, audio, video, and files to LLMs along with <code>user</code> messages.
+As with standard text-only prompts, you also add media to the prompt using the DSL structure for prompt construction.</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+import kotlinx.io.files.Path
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;multimodal_input&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">user</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="o">+</span><span class="s">&quot;Describe these images&quot;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="n">attachments</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="n">image</span><span class="p">(</span><span class="s">&quot;https://example.com/test.png&quot;</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">            </span><span class="n">image</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;/User/koog/image.png&quot;</span><span class="p">))</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-02.kt -->
+
+<h3 id="textual-prompt-content">Textual prompt content</h3>
+<p>To accommodate for the support for various attachment types and create a clear distinction between text and file inputs in a prompt, you put text messages in a dedicated <code>content</code> parameter within a user prompt.
+To add file inputs, provide them as a list within the <code>attachments</code> parameter.</p>
+<p>The general format of a user message that includes a text message and a list of attachments is as follows:</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+
+val prompt = prompt("prompt") {
+-->
+<!--- SUFFIX
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">user</span><span class="p">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This is the user message&quot;</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">attachments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="c1">// Add attachments</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-03.kt -->
+
+<h3 id="file-attachments">File attachments</h3>
+<p>To include an attachment, provide the file in the <code>attachments</code> parameter, following the format below:</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+import ai.koog.prompt.message.Attachment
+import ai.koog.prompt.message.AttachmentContent
+
+val prompt = prompt("prompt") {
+-->
+<!--- SUFFIX
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">user</span><span class="p">(</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Describe this image&quot;</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">attachments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">Attachment</span><span class="p">.</span><span class="na">Image</span><span class="p">(</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttachmentContent</span><span class="p">.</span><span class="na">URL</span><span class="p">(</span><span class="s">&quot;https://example.com/capture.png&quot;</span><span class="p">),</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">            </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;png&quot;</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">mimeType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;image/png&quot;</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="n">fileName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;capture.png&quot;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-04.kt -->
+
+<p>The <code>attachments</code> parameter takes a list of file inputs, where each item is an instance of one of the following classes:</p>
+<ul>
+<li><code>Attachment.Image</code>: image attachments, such as <code>jpg</code> or <code>png</code> files.</li>
+<li><code>Attachment.Audio</code>: audio attachments, such as <code>mp3</code> or <code>wav</code> files.</li>
+<li><code>Attachment.Video</code>: video attachments, such as <code>mpg</code> or <code>avi</code> files.</li>
+<li><code>Attachment.File</code>: file attachments, such as <code>pdf</code> or <code>txt</code> files.</li>
+</ul>
+<p>Each of the classes above takes the following parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Data type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><a href="#attachmentcontent">AttachmentContent</a></td>
+<td>Yes</td>
+<td>The source of the provided file content. For more information, see <a href="#attachmentcontent">AttachmentContent</a>.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>The format of the provided file. For example, <code>png</code>.</td>
+</tr>
+<tr>
+<td><code>mimeType</code></td>
+<td>String</td>
+<td>Only for <code>Attachment.File</code></td>
+<td>The MIME Type of the provided file. For example, <code>image/png</code>.</td>
+</tr>
+<tr>
+<td><code>fileName</code></td>
+<td>String</td>
+<td>No</td>
+<td>The name of the provided file including the extension. For example, <code>screenshot.png</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>For more details, see <a href="https://api.koog.ai/prompt/prompt-model/ai.koog.prompt.message/-attachment/index.html">API reference</a>.</p>
+<h4 id="attachmentcontent">AttachmentContent</h4>
+<p><code>AttachmentContent</code> defines the type and source of content that is provided as an input to the LLM. The following
+classes are supported:</p>
+<ul>
+<li><code>AttachmentContent.URL(val url: String)</code></li>
+</ul>
+<p>Provides file content from the specified URL. Takes the following parameter:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Data type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>The URL of the provided content.</td>
+</tr>
+</tbody>
+</table>
+<p>See also <a href="https://api.koog.ai/prompt/prompt-model/ai.koog.prompt.message/-attachment-content/-u-r-l/index.html">API reference</a>.</p>
+<ul>
+<li><code>AttachmentContent.Binary.Bytes(val data: ByteArray)</code></li>
+</ul>
+<p>Provides file content as a byte array. Takes the following parameter:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Data type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>ByteArray</td>
+<td>Yes</td>
+<td>The file content provided as a byte array.</td>
+</tr>
+</tbody>
+</table>
+<p>See also <a href="https://api.koog.ai/prompt/prompt-model/ai.koog.prompt.message/-attachment-content/-binary/index.html">API reference</a>.</p>
+<ul>
+<li><code>AttachmentContent.Binary.Base64(val base64: String)</code></li>
+</ul>
+<p>Provides file content encoded as a Base64 string. Takes the following parameter:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Data type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>base64</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>The Base64 string containing file data.</td>
+</tr>
+</tbody>
+</table>
+<p>See also <a href="https://api.koog.ai/prompt/prompt-model/ai.koog.prompt.message/-attachment-content/-binary/index.html">API reference</a>.</p>
+<ul>
+<li><code>AttachmentContent.PlainText(val text: String)</code></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Applies only if the attachment type is <code>Attachment.File</code>.</p>
+</div>
+<p>Provides content from a plain text file (such as the <code>text/plain</code> MIME type). Takes the following parameter:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Data type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>The content of the file.</td>
+</tr>
+</tbody>
+</table>
+<p>See also <a href="https://api.koog.ai/prompt/prompt-model/ai.koog.prompt.message/-attachment-content/-plain-text/index.html">API reference</a>.</p>
+<h3 id="mixed-attachment-content">Mixed attachment content</h3>
+<p>In addition to providing different types of attachments in separate prompts or messages, you can also provide multiple and mixed types of attachments in a single <code>user</code> message:</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+import kotlinx.io.files.Path
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;mixed_content&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">user</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="o">+</span><span class="s">&quot;Compare the image with the document content.&quot;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="n">attachments</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">            </span><span class="n">image</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;/User/koog/page.png&quot;</span><span class="p">))</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="n">binaryFile</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;/User/koog/page.pdf&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;application/pdf&quot;</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-05.kt -->
+
+<h2 id="choosing-between-llm-clients-and-prompt-executors">Choosing between LLM clients and prompt executors</h2>
+<p>When working with the Prompt API, you can run prompts by using either LLM clients or prompt executors.
+To choose between clients and executors, consider the following factors:</p>
+<ul>
+<li>Use LLM clients directly if you work with a single LLM provider and do not require advanced lifecycle management. To learm more, see <a href="#running-prompts-with-llm-clients">Running prompts with LLM clients</a>.</li>
+<li>Use prompt executors if you need a higher level of abstraction for managing LLMs and their lifecycle, or if you want to run prompts with a consistent API across multiple providers and dynamically switch between them.
+  To learn more, see <a href="#running-prompts-with-prompt-executors">Runnning prompts with prompt executors</a>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both the LLM clients and prompt executors let you stream responses, generate multiple choices, and run content moderation.
+For more information, refer to the <a href="https://api.koog.ai/index.html">API Reference</a> for the specific client or executor.</p>
+</div>
+<h2 id="running-prompts-with-llm-clients">Running prompts with LLM clients</h2>
+<p>You can use LLM clients to run prompts if you work with a single LLM provider and do not require advanced lifecycle management.
+Koog provides the following LLM clients:</p>
+<ul>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-openai-client/ai.koog.prompt.executor.clients.openai/-open-a-i-l-l-m-client/index.html">OpenAILLMClient</a></li>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-anthropic-client/ai.koog.prompt.executor.clients.anthropic/-anthropic-l-l-m-client/index.html">AnthropicLLMClient</a></li>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-google-client/ai.koog.prompt.executor.clients.google/-google-l-l-m-client/index.html">GoogleLLMClient</a></li>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-openrouter-client/ai.koog.prompt.executor.clients.openrouter/-open-router-l-l-m-client/index.html">OpenRouterLLMClient</a></li>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-deepseek-client/ai.koog.prompt.executor.clients.deepseek/-deep-seek-l-l-m-client/index.html">DeepSeekLLMClient</a></li>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-ollama-client/ai.koog.prompt.executor.ollama.client/-ollama-client/index.html">OllamaClient</a></li>
+<li><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-clients/prompt-executor-bedrock-client/ai.koog.prompt.executor.clients.bedrock/-bedrock-l-l-m-client/index.html">BedrockLLMClient</a> (JVM only)</li>
+</ul>
+<p>To run a prompt using an LLM client, perform the following:</p>
+<p>1) Create the LLM client that handles the connection between your application and LLM providers. For example:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+const val apiKey = "apikey"
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Create an OpenAI client</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">apiKey</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-06.kt -->
+
+<p>2) Call the <code>execute</code> method with the prompt and LLM as arguments.</p>
+<!--- INCLUDE
+import ai.koog.agents.example.examplePromptApi01.prompt
+import ai.koog.agents.example.examplePromptApi06.client
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import kotlinx.coroutines.runBlocking
+
+fun main() {
+runBlocking {
+-->
+<!--- SUFFIX
+}
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Execute the prompt</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIModels</span><span class="p">.</span><span class="na">Chat</span><span class="p">.</span><span class="na">GPT4o</span><span class="w">  </span><span class="c1">// You can choose different models</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-07.kt -->
+
+<p>Here is an example that uses the OpenAI client to run a prompt:</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import ai.koog.prompt.params.LLMParams
+import kotlinx.coroutines.runBlocking
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="c1">// Set up the OpenAI client with your API key</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="c1">// Create a prompt</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;prompt_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LLMParams</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">            </span><span class="c1">// Add a system message to set the context</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">            </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">            </span><span class="c1">// Add a user message</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">            </span><span class="n">user</span><span class="p">(</span><span class="s">&quot;Tell me about Kotlin&quot;</span><span class="p">)</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">            </span><span class="c1">// You can also add assistant messages for few-shot examples</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">            </span><span class="n">assistant</span><span class="p">(</span><span class="s">&quot;Kotlin is a modern programming language...&quot;</span><span class="p">)</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">            </span><span class="c1">// Add another user message</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">            </span><span class="n">user</span><span class="p">(</span><span class="s">&quot;What are its key features?&quot;</span><span class="p">)</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">        </span><span class="c1">// Execute the prompt and get the response</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIModels</span><span class="p">.</span><span class="na">Chat</span><span class="p">.</span><span class="na">GPT4o</span><span class="p">)</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="p">}</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-08.kt -->
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The LLM clients let you stream responses, generate multiple choices, and run content moderation.
+For more information, refer to the API Reference for the specific client.
+To learn more about content moderation, see <a href="../content-moderation/">Content moderation</a>.</p>
+</div>
+<h2 id="running-prompts-with-prompt-executors">Running prompts with prompt executors</h2>
+<p>While LLM clients provide direct access to providers, prompt executors offer a higher-level abstraction that simplifies common use cases and handles client lifecycle management.
+They are ideal when you need to:</p>
+<ul>
+<li>Quickly prototype without managing client configuration.</li>
+<li>Work with multiple providers through a unified interface.</li>
+<li>Simplify dependency injection in larger applications.</li>
+<li>Abstract away provider-specific details.</li>
+</ul>
+<h3 id="executor-types">Executor types</h3>
+<p>Koog provides two main prompt executors:</p>
+<table>
+<thead>
+<tr>
+<th><div style="width:175px">Name</div></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-llms/ai.koog.prompt.executor.llms/-single-l-l-m-prompt-executor/index.html"><code>SingleLLMPromptExecutor</code></a></td>
+<td>Wraps a single LLM client for one provider. Use this executor if your agent only requires the ability to switch between models within a single LLM provider.</td>
+</tr>
+<tr>
+<td><a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-llms/ai.koog.prompt.executor.llms/-multi-l-l-m-prompt-executor/index.html"><code>MultiLLMPromptExecutor</code></a></td>
+<td>Routes to multiple LLM clients by a provider, with optional fallbacks for each provider to be used when a requested provider is not available. Use this executor if your agent needs to switch between models from different providers.</td>
+</tr>
+</tbody>
+</table>
+<p>These are implementations of the <a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-model/ai.koog.prompt.executor.model/-prompt-executor/index.html"><code>PromtExecutor</code></a> interface for executing prompts with LLMs.</p>
+<h3 id="creating-a-single-provider-executor">Creating a single provider executor</h3>
+<p>To create a prompt executor for a specific LLM provider, perform the following:</p>
+<p>1) Configure an LLM client for a specific provider with the corresponding API key:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">openAIClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">))</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-09.kt -->
+<p>2) Create a prompt executor using <a href="https://api.koog.ai/prompt/prompt-executor/prompt-executor-llms/ai.koog.prompt.executor.llms/-single-l-l-m-prompt-executor/index.html"><code>SingleLLMPromptExecutor</code></a>:</p>
+<!--- INCLUDE
+import ai.koog.agents.example.examplePromptApi09.openAIClient
+import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">promptExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SingleLLMPromptExecutor</span><span class="p">(</span><span class="n">openAIClient</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-10.kt -->
+
+<h3 id="creating-a-multi-provider-executor">Creating a multi-provider executor</h3>
+<p>To create a prompt executor that works with multiple LLM providers, do the following:</p>
+<p>1) Configure clients for the required LLM providers with the corresponding API keys:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.ollama.client.OllamaClient
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">openAIClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">))</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">ollamaClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OllamaClient</span><span class="p">()</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-11.kt -->
+
+<p>2) Pass the configured clients to the <code>MultiLLMPromptExecutor</code> class constructor to create a prompt executor with multiple LLM providers:</p>
+<!--- INCLUDE
+import ai.koog.agents.example.examplePromptApi11.openAIClient
+import ai.koog.agents.example.examplePromptApi11.ollamaClient
+import ai.koog.prompt.executor.llms.MultiLLMPromptExecutor
+import ai.koog.prompt.llm.LLMProvider
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">multiExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MultiLLMPromptExecutor</span><span class="p">(</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="n">LLMProvider</span><span class="p">.</span><span class="na">OpenAI</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">openAIClient</span><span class="p">,</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">LLMProvider</span><span class="p">.</span><span class="na">Ollama</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">ollamaClient</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-12.kt -->
+
+<h3 id="pre-defined-prompt-executors">Pre-defined prompt executors</h3>
+<p>For faster setup, Koog provides the following ready-to-use executor implementations for common providers:</p>
+<ul>
+<li>
+<p>Single provider executors that return <code>SingleLLMPromptExecutor</code> configured with a certain LLM client:</p>
+<ul>
+<li><code>simpleOpenAIExecutor</code> for executing prompts with OpenAI models.</li>
+<li><code>simpleAzureOpenAIExecutor</code> for executing prompts using Azure OpenAI Service.</li>
+<li><code>simpleAnthropicExecutor</code> for executing prompts with Anthropic models.</li>
+<li><code>simpleGoogleAIExecutor</code> for executing prompts with Google models.</li>
+<li><code>simpleOpenRouterExecutor</code> for executing prompts with OpenRouter.</li>
+<li><code>simpleOllamaAIExecutor</code> for executing prompts with Ollama.</li>
+</ul>
+</li>
+<li>
+<p>Multi-provider executor:</p>
+<ul>
+<li><code>DefaultMultiLLMPromptExecutor</code> which is an implementation of <code>MultiLLMPromptExecutor</code> that supports OpenAI, Anthropic, and Google providers.</li>
+</ul>
+</li>
+</ul>
+<p>Here is an example of creating pre-defined single and multi-provider executors:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.llms.all.simpleOpenAIExecutor
+import ai.koog.prompt.executor.llms.all.DefaultMultiLLMPromptExecutor
+import ai.koog.prompt.executor.clients.anthropic.AnthropicLLMClient
+import ai.koog.prompt.executor.clients.google.GoogleLLMClient
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import kotlinx.coroutines.runBlocking
+
+fun main() {
+    runBlocking {
+-->
+<!--- SUFFIX
+    }
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// Create an OpenAI executor</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">promptExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simpleOpenAIExecutor</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">// Create a DefaultMultiLLMPromptExecutor with OpenAI, Anthropic, and Google LLM clients</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="kd">val</span><span class="w"> </span><span class="nv">openAIClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="kd">val</span><span class="w"> </span><span class="nv">anthropicClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AnthropicLLMClient</span><span class="p">(</span><span class="s">&quot;ANTHROPIC_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="kd">val</span><span class="w"> </span><span class="nv">googleClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GoogleLLMClient</span><span class="p">(</span><span class="s">&quot;GOOGLE_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">multiExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultMultiLLMPromptExecutor</span><span class="p">(</span><span class="n">openAIClient</span><span class="p">,</span><span class="w"> </span><span class="n">anthropicClient</span><span class="p">,</span><span class="w"> </span><span class="n">googleClient</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-13.kt -->
+
+<h3 id="executing-a-prompt">Executing a prompt</h3>
+<p>The prompt executors provide methods to run prompts using various capabilities, such as streaming, multiple choices generation, and content moderation.</p>
+<p>Here is an example of how to run a prompt with a specific LLM using the <code>execute</code> method:</p>
+<!--- INCLUDE
+import ai.koog.agents.example.examplePromptApi04.prompt
+import ai.koog.agents.example.examplePromptApi10.promptExecutor
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import kotlinx.coroutines.runBlocking
+
+fun main() {
+    runBlocking {
+-->
+<!--- SUFFIX
+    }
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// Execute a prompt</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promptExecutor</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="n">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIModels</span><span class="p">.</span><span class="na">Chat</span><span class="p">.</span><span class="na">GPT4o</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-14.kt -->
+
+<p>This will run the prompt with the <code>GPT4o</code> model and return the response.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The prompt executors let you stream responses, generate multiple choices, and run content moderation.
+For more information, refer to the API Reference for the specific executor.
+To learn more about content moderation, see <a href="../content-moderation/">Content moderation</a>.</p>
+</div>
+<h2 id="cached-prompt-executors">Cached prompt executors</h2>
+<p>For repeated requests, you can cache LLM responses to optimize performance and reduce costs.
+Koog provides the <code>CachedPromptExecutor</code>, which is a wrapper around the <code>PromptExecutor</code> that adds caching functionality.
+It lets you store responses from previously executed prompts and retrieve them when the same prompts are run again.</p>
+<p>To create a cached prompt executor, perform the following:</p>
+<p>1) Create a prompt executor for which you want to cache responses:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">))</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">promptExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SingleLLMPromptExecutor</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-15.kt -->
+
+<p>2) Create a <code>CachedPromptExecutor</code> instance with the desired cache and provide the created prompt executor:</p>
+<!--- INCLUDE
+import ai.koog.agents.example.examplePromptApi15.promptExecutor
+import ai.koog.prompt.cache.files.FilePromptCache
+import ai.koog.prompt.executor.cached.CachedPromptExecutor
+import kotlin.io.path.Path
+import kotlinx.coroutines.runBlocking
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cachedExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CachedPromptExecutor</span><span class="p">(</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FilePromptCache</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;/cache_directory&quot;</span><span class="p">)),</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="n">nested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promptExecutor</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-16.kt -->
+
+<p>3) Run the cached prompt executor with the desired prompt and model:</p>
+<!--- INCLUDE
+import ai.koog.prompt.dsl.prompt
+import ai.koog.agents.example.examplePromptApi16.cachedExecutor
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import kotlinx.coroutines.runBlocking
+
+fun main() {
+    runBlocking {
+        val prompt = prompt("test") {
+            user("Hello")
+        }
+
+-->
+<!--- SUFFIX
+    }
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cachedExecutor</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">OpenAIModels</span><span class="p">.</span><span class="na">Chat</span><span class="p">.</span><span class="na">GPT4o</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-17.kt -->
+
+<p>Now you can run the same prompt with the same model multiple times, the response will be retrieved from the cache.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>If you call <code>executeStreaming()</code> with the cached prompt executor, it produces a response as a single chunk.</li>
+<li>If you call <code>moderate()</code> with the cached prompt executor, it forwards the request to the nested prompt executor and does not use the cache.</li>
+<li>Caching of multiple choice responses is not supported.</li>
+</ul>
+</div>
+<h2 id="retry-functionality">Retry functionality</h2>
+<p>When working with LLM providers, you may encounter transient errors like rate limits or temporary service unavailability. The <code>RetryingLLMClient</code> decorator adds automatic retry logic to any LLM client.</p>
+<h3 id="basic-usage">Basic usage</h3>
+<p>Wrap any existing client with retry capability:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import ai.koog.prompt.executor.clients.retry.RetryingLLMClient
+import ai.koog.prompt.dsl.prompt
+import kotlinx.coroutines.runBlocking
+
+fun main() {
+    runBlocking {
+        val apiKey = System.getenv("OPENAI_API_KEY")
+        val prompt = prompt("test") {
+            user("Hello")
+        }
+-->
+<!--- SUFFIX
+    }
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// Wrap any client with retry capability</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">apiKey</span><span class="p">)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">resilientClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1">// Now all operations will automatically retry on transient errors</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="kd">val</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resilientClient</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">OpenAIModels</span><span class="p">.</span><span class="na">Chat</span><span class="p">.</span><span class="na">GPT4o</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-18.kt -->
+
+<h4 id="configuring-retry-behavior">Configuring retry behavior</h4>
+<p>Koog provides several predefined retry configurations:</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Max Attempts</th>
+<th>Initial Delay</th>
+<th>Max Delay</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DISABLED</code></td>
+<td>1 (no retry)</td>
+<td>-</td>
+<td>-</td>
+<td>Development and testing</td>
+</tr>
+<tr>
+<td><code>CONSERVATIVE</code></td>
+<td>3</td>
+<td>2s</td>
+<td>30s</td>
+<td>Normal production use</td>
+</tr>
+<tr>
+<td><code>AGGRESSIVE</code></td>
+<td>5</td>
+<td>500ms</td>
+<td>20s</td>
+<td>Critical operations</td>
+</tr>
+<tr>
+<td><code>PRODUCTION</code></td>
+<td>3</td>
+<td>1s</td>
+<td>20s</td>
+<td>Recommended default</td>
+</tr>
+</tbody>
+</table>
+<p>You can use them directly or create custom configurations:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.clients.retry.RetryConfig
+import ai.koog.prompt.executor.clients.retry.RetryingLLMClient
+import kotlin.time.Duration.Companion.seconds
+
+val apiKey = System.getenv("OPENAI_API_KEY")
+val client = OpenAILLMClient(apiKey)
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// Use the predefined configuration</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">conservativeClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="n">delegate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">,</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryConfig</span><span class="p">.</span><span class="na">CONSERVATIVE</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">)</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1">// Or create a custom configuration</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">customClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="n">delegate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">,</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryConfig</span><span class="p">(</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">        </span><span class="n">maxAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">        </span><span class="n">initialDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.</span><span class="n">seconds</span><span class="p">,</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">        </span><span class="n">maxDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30.</span><span class="n">seconds</span><span class="p">,</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">        </span><span class="n">backoffMultiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.0</span><span class="p">,</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">        </span><span class="n">jitterFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-19.kt -->
+
+<h4 id="retryable-error-patterns">Retryable error patterns</h4>
+<p>By default, the retry mechanism recognizes common transient errors:</p>
+<ul>
+<li>
+<p><strong>HTTP status codes</strong>:</p>
+<ul>
+<li><code>429</code>: Rate limit</li>
+<li><code>500</code>: Internal server error</li>
+<li><code>502</code>: Bag gateway</li>
+<li><code>503</code>: Service unavailable</li>
+<li><code>504</code>: Gateway timeout</li>
+<li><code>529</code>: Anthropic overloaded</li>
+</ul>
+</li>
+<li>
+<p><strong>Error keywords</strong>:</p>
+<ul>
+<li>rate limit</li>
+<li>too many requests</li>
+<li>request timeout</li>
+<li>connection timeout</li>
+<li>read timeout</li>
+<li>write timeout</li>
+<li>connection reset by peer</li>
+<li>connection refused</li>
+<li>temporarily unavailable</li>
+<li>service unavailable</li>
+</ul>
+</li>
+</ul>
+<p>You can define custom patterns for your specific needs:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.retry.RetryConfig
+import ai.koog.prompt.executor.clients.retry.RetryablePattern
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryConfig</span><span class="p">(</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="n">retryablePatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">        </span><span class="n">RetryablePattern</span><span class="p">.</span><span class="na">Status</span><span class="p">(</span><span class="m">429</span><span class="p">),</span><span class="w">           </span><span class="c1">// Specific status code</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">        </span><span class="n">RetryablePattern</span><span class="p">.</span><span class="na">Keyword</span><span class="p">(</span><span class="s">&quot;quota&quot;</span><span class="p">),</span><span class="w">      </span><span class="c1">// Keyword in error message</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">        </span><span class="n">RetryablePattern</span><span class="p">.</span><span class="na">Regex</span><span class="p">(</span><span class="n">Regex</span><span class="p">(</span><span class="s">&quot;ERR_\\d+&quot;</span><span class="p">)),</span><span class="w"> </span><span class="c1">// Custom regex pattern</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">        </span><span class="n">RetryablePattern</span><span class="p">.</span><span class="na">Custom</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">      </span><span class="c1">// Custom logic</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">            </span><span class="n">error</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;temporary&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">20</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-20.kt -->
+
+<h4 id="retry-with-prompt-executors">Retry with prompt executors</h4>
+<p>When working with prompt executors, you can wrap the underlying LLM client with a retry mechanism before creating the executor:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.anthropic.AnthropicLLMClient
+import ai.koog.prompt.executor.clients.bedrock.BedrockLLMClient
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.clients.retry.RetryConfig
+import ai.koog.prompt.executor.clients.retry.RetryingLLMClient
+import ai.koog.prompt.executor.llms.MultiLLMPromptExecutor
+import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
+import ai.koog.prompt.llm.LLMProvider
+import aws.sdk.kotlin.runtime.auth.credentials.StaticCredentialsProvider
+
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">// Single provider executor with retry</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">resilientClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">)),</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="n">RetryConfig</span><span class="p">.</span><span class="na">PRODUCTION</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">)</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="kd">val</span><span class="w"> </span><span class="nv">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SingleLLMPromptExecutor</span><span class="p">(</span><span class="n">resilientClient</span><span class="p">)</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="c1">// Multi-provider executor with flexible client configuration</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="kd">val</span><span class="w"> </span><span class="nv">multiExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MultiLLMPromptExecutor</span><span class="p">(</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="n">LLMProvider</span><span class="p">.</span><span class="na">OpenAI</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">        </span><span class="n">OpenAILLMClient</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_KEY&quot;</span><span class="p">)),</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">        </span><span class="n">RetryConfig</span><span class="p">.</span><span class="na">CONSERVATIVE</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">    </span><span class="p">),</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="w">    </span><span class="n">LLMProvider</span><span class="p">.</span><span class="na">Anthropic</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="w">        </span><span class="n">AnthropicLLMClient</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;ANTHROPIC_API_KEY&quot;</span><span class="p">)),</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="w">        </span><span class="n">RetryConfig</span><span class="p">.</span><span class="na">AGGRESSIVE</span><span class="w">  </span>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="w">    </span><span class="p">),</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="w">    </span><span class="c1">// The Bedrock client already has a built-in AWS SDK retry </span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="w">    </span><span class="n">LLMProvider</span><span class="p">.</span><span class="na">Bedrock</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">BedrockLLMClient</span><span class="p">(</span>
+</span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="w">        </span><span class="n">credentialsProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StaticCredentialsProvider</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a><span class="w">            </span><span class="n">accessKeyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="p">)</span>
+</span><span id="__span-20-22"><a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a><span class="w">            </span><span class="n">secretAccessKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;AWS_SECRET_ACCESS_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-20-23"><a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="w">            </span><span class="n">sessionToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getenv</span><span class="p">(</span><span class="s">&quot;AWS_SESSION_TOKEN&quot;</span><span class="p">)</span>
+</span><span id="__span-20-24"><a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-20-25"><a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a><span class="w">    </span><span class="p">),</span>
+</span><span id="__span-20-26"><a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-21.kt -->
+
+<h4 id="streaming-with-retry">Streaming with retry</h4>
+<p>Streaming operations can optionally be retried. This feature is disabled by default.</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import ai.koog.prompt.executor.clients.retry.RetryConfig
+import ai.koog.prompt.executor.clients.retry.RetryingLLMClient
+import ai.koog.prompt.dsl.prompt
+import kotlinx.coroutines.runBlocking
+
+fun main() {
+    runBlocking {
+        val baseClient = OpenAILLMClient(System.getenv("OPENAI_KEY"))
+        val prompt = prompt("test") {
+            user("Generate a story")
+        }
+-->
+<!--- SUFFIX
+    }
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryConfig</span><span class="p">(</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="n">maxAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="p">)</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="kd">val</span><span class="w"> </span><span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RetryingLLMClient</span><span class="p">(</span><span class="n">baseClient</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="kd">val</span><span class="w"> </span><span class="nv">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">executeStreaming</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">OpenAIModels</span><span class="p">.</span><span class="na">Chat</span><span class="p">.</span><span class="na">GPT4o</span><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-22.kt -->
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Streaming retry only applies to the connection failures before the first token is received. Once streaming begins, errors are passed through to preserve content integrity.</p>
+</div>
+<h3 id="timeout-configuration">Timeout configuration</h3>
+<p>All LLM clients support timeout configuration to prevent hanging requests:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.ConnectionTimeoutConfig
+import ai.koog.prompt.executor.clients.openai.OpenAIClientSettings
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+
+val apiKey = System.getenv("OPENAI_API_KEY")
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAILLMClient</span><span class="p">(</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="n">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">apiKey</span><span class="p">,</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIClientSettings</span><span class="p">(</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">        </span><span class="n">timeoutConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConnectionTimeoutConfig</span><span class="p">(</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">            </span><span class="n">connectTimeoutMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000</span><span class="p">,</span><span class="w">    </span><span class="c1">// 5 seconds to establish connection</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">            </span><span class="n">requestTimeoutMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60000</span><span class="w">    </span><span class="c1">// 60 seconds for the entire request</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="p">)</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="p">)</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-23.kt -->
+
+<h3 id="error-handling">Error handling</h3>
+<p>When working with LLMs in production, you need to imlement error-handling strategies:</p>
+<ul>
+<li><strong>Use try-catch blocks</strong> to handle unexpected errors.</li>
+<li><strong>Log errors with context</strong> for debugging.</li>
+<li><strong>Implement fallback strategies</strong> for critical operations.</li>
+<li><strong>Monitor retry patterns</strong> to identify recurring or systemic issues.</li>
+</ul>
+<p>Here is an example of comprehensive error handling:</p>
+<!--- INCLUDE
+import ai.koog.prompt.executor.clients.openai.OpenAILLMClient
+import ai.koog.prompt.executor.clients.openai.OpenAIModels
+import ai.koog.prompt.executor.clients.retry.RetryingLLMClient
+import ai.koog.prompt.dsl.prompt
+import kotlinx.coroutines.runBlocking
+import org.slf4j.LoggerFactory
+
+fun main() {
+    runBlocking {
+        val logger = LoggerFactory.getLogger("Example")
+        val resilientClient = RetryingLLMClient(
+            OpenAILLMClient(System.getenv("OPENAI_KEY"))
+        )
+        val prompt = prompt("test") { user("Hello") }
+        val model = OpenAIModels.Chat.GPT4o
+
+        fun processResponse(response: Any) { /* ... */ }
+        fun scheduleRetryLater() { /* ... */ }
+        fun notifyAdministrator() { /* ... */ }
+        fun useDefaultResponse() { /* ... */ }
+-->
+<!--- SUFFIX
+    }
+}
+-->
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resilientClient</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">)</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="n">processResponse</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;LLM operation failed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="na">message</span><span class="o">?.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;rate limit&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">            </span><span class="c1">// Handle rate limiting specifically</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">            </span><span class="n">scheduleRetryLater</span><span class="p">()</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="na">message</span><span class="o">?.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;invalid api key&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="w">            </span><span class="c1">// Handle authentication errors</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="w">            </span><span class="n">notifyAdministrator</span><span class="p">()</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="w">            </span><span class="c1">// Fall back to an alternative solution</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="w">            </span><span class="n">useDefaultResponse</span><span class="p">()</span>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="p">}</span>
+</span></code></pre></div>
+<!--- KNIT example-prompt-api-24.kt -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2000-2025 JetBrains s.r.o.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://docs.koog.ai/koog-slack-channel/" target="_blank" rel="noopener" title="Koog on Slack" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M94.1 315.1c0 25.9-21.2 47.1-47.1 47.1S0 341 0 315.1 21.2 268 47.1 268h47.1v47.1zm23.7 0c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1v117.8c0 25.9-21.2 47.1-47.1 47.1s-47.1-21.2-47.1-47.1zm47.1-189c-25.9 0-47.1-21.2-47.1-47.1s21.2-47 47.1-47S212 53.2 212 79.1v47.1h-47.1zm0 23.7c25.9 0 47.1 21.2 47.1 47.1S190.8 244 164.9 244H47.1C21.2 244 0 222.8 0 196.9s21.2-47.1 47.1-47.1zm189 47.1c0-25.9 21.2-47.1 47.1-47.1s47 21.2 47 47.1-21.2 47.1-47.1 47.1h-47.1v-47.1zm-23.7 0c0 25.9-21.2 47.1-47.1 47.1S236 222.8 236 196.9V79.1c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1zm-47.1 189c25.9 0 47.1 21.2 47.1 47.1s-21.2 47-47.1 47-47.1-21.2-47.1-47.1v-47.1h47.1zm0-23.7c-25.9 0-47.1-21.2-47.1-47.1s21.2-47.1 47.1-47.1h117.8c25.9 0 47.1 21.2 47.1 47.1s-21.2 47.1-47.1 47.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.action.edit", "navigation.expand", "navigation.tabs", "navigation.tabs.sticky", "navigation.instant"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+
+  </body>
+</html>
