@@ -15,6 +15,56 @@ import ai.koog.prompt.message.Message
 import ai.koog.prompt.params.LLMParams
 
 /**
+ * Executes a subtask with validation and verification of the results.
+ * The method defines a subtask for the AI agent using the provided input
+ * and additional parameters and ensures that the output is evaluated
+ * based on its correctness and feedback.
+ *
+ * @param Input The type of the input provided to the subtask.
+ * @param input The input data for the subtask, which will be used to
+ * create and execute the task.
+ * @param tools An optional list of tools that can be utilized during
+ * the execution of the subtask.
+ * @param llmModel An optional parameter specifying the LLM model to be used for the subtask.
+ * @param llmParams Optional configuration parameters for the LLM, such as temperature
+ * and token limits.
+ * @param parallelTools A flag indicating whether tools should be executed
+ * in parallel. Defaults to false.
+ * @param assistantResponseRepeatMax An optional parameter specifying the maximum number of
+ * retries for obtaining valid responses from the assistant.
+ * @param defineTask A suspend function that defines the subtask as a string
+ * based on the provided input.
+ * @return A [CriticResult] object containing the verification status, feedback,
+ * and the original input for the subtask.
+ */
+@OptIn(InternalAgentToolsApi::class, InternalAgentsApi::class)
+public suspend inline fun <reified Input> AIAgentFunctionalContext.subtaskWithVerification(
+    input: Input,
+    tools: List<Tool<*, *>>? = null,
+    llmModel: LLModel? = null,
+    llmParams: LLMParams? = null,
+    parallelTools: Boolean = false,
+    assistantResponseRepeatMax: Int? = null,
+    defineTask: suspend AIAgentFunctionalContext.(input: Input) -> String
+): CriticResult<Input> {
+    val result = subtask<Input, CriticResultFromLLM>(
+        input,
+        tools,
+        llmModel,
+        llmParams,
+        parallelTools,
+        assistantResponseRepeatMax,
+        defineTask
+    )
+
+    return CriticResult(
+        successful = result.isCorrect,
+        feedback = result.feedback,
+        input = input
+    )
+}
+
+/**
  * Executes a subtask within the larger context of an AI agent's functional operation. This method allows you to define a specific
  * task to be performed, utilizing the given input, tools, and optional configuration parameters.
  *
@@ -32,7 +82,7 @@ import ai.koog.prompt.params.LLMParams
 @OptIn(InternalAgentToolsApi::class)
 public suspend inline fun <reified Input, reified Output> AIAgentFunctionalContext.subtask(
     input: Input,
-    tools: List<Tool<*, *>>,
+    tools: List<Tool<*, *>>? = null,
     llmModel: LLModel? = null,
     llmParams: LLMParams? = null,
     parallelTools: Boolean = false,
@@ -62,7 +112,7 @@ public suspend inline fun <reified Input, reified Output> AIAgentFunctionalConte
 @OptIn(InternalAgentToolsApi::class, DetachedPromptExecutorAPI::class, InternalAgentsApi::class)
 public suspend inline fun <reified Input, reified Output, reified OutputTransformed> AIAgentFunctionalContext.subtask(
     input: Input,
-    tools: List<Tool<*, *>>,
+    tools: List<Tool<*, *>>? = null,
     finishTool: Tool<Output, OutputTransformed>,
     llmModel: LLModel? = null,
     llmParams: LLMParams? = null,
@@ -73,7 +123,7 @@ public suspend inline fun <reified Input, reified Output, reified OutputTransfor
     var fedbacksCount = 0
     val maxAssistantResponses = assistantResponseRepeatMax ?: SubgraphWithTaskUtils.ASSISTANT_RESPONSE_REPEAT_MAX
 
-    val toolsSubset = tools.map { it.descriptor }
+    val toolsSubset = tools?.map { it.descriptor } ?: llm.readSession { this.tools.toList() }
 
     val originalTools = llm.readSession { this.tools.toList() }
 
