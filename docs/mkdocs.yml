@@ -9,6 +9,7 @@ nav:
           - Functional agents: functional-agents.md
           - Complex workflow agents: complex-workflow-agents.md
       - Prompt API: prompt-api.md
+      - LLM parameters: llm-parameters.md
       - Tools:
           - Overview: tools-overview.md
           - Built-in tools: built-in-tools.md
@@ -107,6 +108,8 @@ plugins:
           - complex-workflow-agents.md: This page explains how you can create agents that handle complex workflows by defining custom strategies, tools, configurations, and custom input and output types.
         Prompt API:
           - prompt-api.md: This page includes detailed instructions about the use of Prompt API, which provides a comprehensive toolkit for interacting with Large Language Models in production applications.
+        LLM Parameters:
+          - llm-parameters.md: This page provides details about LLM Parameters, which allow you to control and customize the behavior of language models by adjusting parameters like temperature, token limits, schemas, and tool choices.
         Tools:
           - tools-overview.md: This page provides a broad overview of the implementation of tools in Koog.
           - built-in-tools.md: This page provides details about built-in tools that handle common scenarios of agent-user interaction.
